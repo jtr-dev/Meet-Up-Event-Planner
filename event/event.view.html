@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+  
+
+    <div id="container">
+        <div id="row">
+            <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-1">
+                    <div class="row">
+
+                        <button ng-model="vm.event" class="btn btn-primary">Create</button>
+                        <button class="btn btn-secondary-outline">Cancel</button>
+                    </div>
+                </div>
+                <div class="hr"></div>
+                <div class="col-lg-12">
+                    <div class="col-md-12">
+                        <label for="form">
+
+                        </label>
+                    </div>
+
+
+                </div>
+                <div class="hr"></div>
+
+                <table>
+                    <tbody>
+                        <tr >
+                            <th></th>
+                            <td>
+                                <input name="title" type="text" class="form-control" placeholder="Event Name" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>When</th>
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <div class='col-sm-4'>
+                                            <input type='text' class="form-control" id='datetimepicker1' />
+
+                                        </div>
+                                        <div class="col-sm-1">
+                                            to
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                            <input type="text" class="form-control" id="datetimepicker2" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--TODO:  datetimepicker is not a funtion -->
+                                        <script type="text/javascript">
+                                            $(function () {
+                                                $('#datetimepicker1').datetimepicker();
+                                                $('#datetimepicker2').datetimepicker();
+                                                
+                                            });
+                                        </script>
+                               
+                             
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>All day</th>
+                            <td>
+                                <form>
+                                    <input type="checkbox" />
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Where
+                            </th>
+                            <td>
+                                <form>
+                                    <input type="text" class="form-control"  placeholder="Enter a location" />
+                                </form>
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <th>
+                                Description
+                            </th>
+                            <td>
+                                <form>
+                                    <textarea class="form-control"></textarea>
+                                </form>
+                            </td>
+                        </tr>
+
+
+
+
+                        <tr>
+                            <th class="ep-dp-dt-th">
+                                <label>Visibility </label>
+                            </th>
+                            <td>
+                                <form autocomplete="off" id="">
+                                    <input id=":1q.privacyPublic" class="ep-dp-radio" name="privacy" type="radio" value="2" aria-labelledby=":1q.privacy-label :1q.privacyPublic-wrapper" checked="checked" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPublic-wrapper" for=":1q.privacyPublic">Public</label>
+                                    <input id=":1q.privacyPrivate" class="ep-dp-radio" name="privacy" type="radio" value="3" aria-labelledby=":1q.privacy-label :1q.privacyPrivate-wrapper" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPrivate-wrapper" for=":1q.privacyPrivate">Private</label>
+                                    <input id=":1q.privacySecret" class="ep-dp-radio" name="privacy" type="radio" value="4" aria-labelledby=":1q.privacy-label :1q.privacySecret-wrapper" tabindex="0" style="display: none;"><label class="ep-dp-radio" id=":1q.privacySecret-wrapper" for=":1q.privacySecret" style="display: none;">Only me</label>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="hr"></div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
