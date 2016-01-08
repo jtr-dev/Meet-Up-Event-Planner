@@ -2,20 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+
 </head>
 <body>
   
 
     <div id="container">
-        <div id="row">
-            <div class="col-md-12">
-                <div class="col-md-8 col-md-offset-1">
-                    <div class="row">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-1">
+                <div class="row">
 
-                        <button ng-model="vm.event" class="btn btn-primary">Create</button>
-                        <button class="btn btn-secondary-outline">Cancel</button>
-                    </div>
+                    <button ng-model="vm.event" class="btn btn-primary">Create</button>
+                    <button class="btn btn-secondary-outline">Cancel</button>
                 </div>
+            </div>
+        </div>
+        <div id="row">
+            <div class="col-md-6">
                 <div class="hr"></div>
                 <div class="col-lg-12">
                     <div class="col-md-12">
@@ -33,36 +36,54 @@
                         <tr >
                             <th></th>
                             <td>
-                                <input name="title" type="text" class="form-control" placeholder="Event Name" />
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <input list="browsers" name="myBrowser" class="form-control" />
+                                        <datalist id="browsers">
+                                            <option value="Birthday">
+                                            <option value="Party">
+                                            <option value="Homecoming">
+                                            <option value="Anniversary">
+                                            <option value="Get together">
+                                        </datalist>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input name="title" type="text" class="form-control" placeholder="Event Name" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Host</th>
+                            <td>
+                                <input type="text" name="host" class="form-control" value="{{vm.user.firstName}} {{vm.user.lastName}}">
                             </td>
                         </tr>
                         <tr>
                             <th>When</th>
                             <td>
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    
 
-                                        <div class='col-sm-4'>
-                                            <input type='text' class="form-control" id='datetimepicker1' />
+                                        <div class='col-sm-5'>
+                                            <input type='text' class="form-control" id='datetimepicker1' autocomplete="on" />
 
                                         </div>
-                                        <div class="col-sm-1">
-                                            to
-                                        </div>
-                                        <div class="col-sm-4">
+                                       <div class="col-sm-2"><span>to</span></div>
+                                        <div class="col-sm-5">
 
-                                            <input type="text" class="form-control" id="datetimepicker2" />
+                                            <input type="text" class="form-control" id="datetimepicker2" autocomplete="on" />
                                         </div>
-                                    </div>
+                                  
                                 </div>
                                 <!--TODO:  datetimepicker is not a funtion -->
-                                        <script type="text/javascript">
-                                            $(function () {
-                                                $('#datetimepicker1').datetimepicker();
-                                                $('#datetimepicker2').datetimepicker();
-                                                
-                                            });
-                                        </script>
+                                <script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker();
+    });
+                                </script>
+
                                
                              
                             </td>
@@ -80,9 +101,88 @@
                                 Where
                             </th>
                             <td>
+                                <script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13
+        });
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function () {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);  // Why 17? Because it looks good.
+            }
+            marker.setIcon(/** @type {google.maps.Icon} */({
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(35, 35)
+            }));
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            var address = '';
+            if (place.address_components) {
+                address = [
+                  (place.address_components[0] && place.address_components[0].short_name || ''),
+                  (place.address_components[1] && place.address_components[1].short_name || ''),
+                  (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+            }
+
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+            infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+            var radioButton = document.getElementById(id);
+            radioButton.addEventListener('click', function () {
+                autocomplete.setTypes(types);
+            });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+    }
+
+                                </script>
                                 <form>
-                                    <input type="text" class="form-control"  placeholder="Enter a location" />
+                                    <input class="form-control controls" id="pac-input" type="text"
+                                           placeholder="Enter a location" />
                                 </form>
+
                             </td>
                         </tr>
 
@@ -108,9 +208,8 @@
                             </th>
                             <td>
                                 <form autocomplete="off" id="">
-                                    <input id=":1q.privacyPublic" class="ep-dp-radio" name="privacy" type="radio" value="2" aria-labelledby=":1q.privacy-label :1q.privacyPublic-wrapper" checked="checked" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPublic-wrapper" for=":1q.privacyPublic">Public</label>
-                                    <input id=":1q.privacyPrivate" class="ep-dp-radio" name="privacy" type="radio" value="3" aria-labelledby=":1q.privacy-label :1q.privacyPrivate-wrapper" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPrivate-wrapper" for=":1q.privacyPrivate">Private</label>
-                                    <input id=":1q.privacySecret" class="ep-dp-radio" name="privacy" type="radio" value="4" aria-labelledby=":1q.privacy-label :1q.privacySecret-wrapper" tabindex="0" style="display: none;"><label class="ep-dp-radio" id=":1q.privacySecret-wrapper" for=":1q.privacySecret" style="display: none;">Only me</label>
+                                    <input id="privacyPrivate" class="ep-dp-radio" name="privacy" type="radio" value="1" checked="checked" tabindex="0" ><label class="ep-dp-radio" id=":1q.privacyPrivate-wrapper" for=":1q.privacyPrivate">Private</label>
+                                    <input id="privacyPublic" class="ep-dp-radio" name="privacy" type="radio" value="2"  tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPublic-wrapper" for=":1q.privacyPublic">Public</label>
                                 </form>
                             </td>
                         </tr>
@@ -120,6 +219,39 @@
 
             </div>
         </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="col-lg-12">
+                    <div class="col-md-12">
+                        <label for="form">
+
+                        </label>
+                    </div>
+
+
+                </div>
+                <table>
+                    <tbody>
+                     
+                        <tr>
+                            <th>Guests</th>
+                            <td>
+                                <div class="col-sm-8">
+                                    <input name="title" type="text" class="form-control" placeholder="Event Name" />
+                                </div>
+                                  
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3nl8LHWHrzIK7M4HfYph2baLjPkbJtsM&signed_in=true&libraries=places&callback=initMap"
+            async defer></script>
 </body>
+
 </html>
