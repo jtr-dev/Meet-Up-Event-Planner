@@ -2,15 +2,18 @@
 
 
 TODO:	
-	Password verification
-	    Requirements
-		    Length (At least 8 char)
-			At least 1 uppercase
-			At least 1 lowercase
-			At least 1 special character  !@#$%
+	Password verification:
+	
+	 1. Length (At least 8 char)
+	
+	 2. At least 1 uppercase
+	
+	 3. At least 1 lowercase
+	
+	 4. At least 1 special character !@#$
 			
 			
-    Location Services to autofill 'Where' input
+ Location Services to autofill 'Where' input
 	
 
 	
