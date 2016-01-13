@@ -6,9 +6,9 @@
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
-    function LoginController($location, AuthenticationService, FlashService) {
+    function LoginController( $location, AuthenticationService, FlashService) {
         var vm = this;
-
+        
         vm.login = login;
 
         (function initController() {
@@ -29,5 +29,12 @@
             });
         };
     }
+
+
+
+
+
+
+
 
 })();

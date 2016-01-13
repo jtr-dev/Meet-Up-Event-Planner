@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies'])
+        .module('app', ['ngRoute', 'ngCookies', ])
         .config(config)
         .run(run);
 
     config.$inject = ['$routeProvider', '$locationProvider'];
-    function config($routeProvider, $locationProvider) {
+    function config($routeProvider, $locationProvider, $rootScope, $http) {
         $routeProvider
             .when('/', {
                 controller: 'HomeController',
@@ -35,6 +35,8 @@
 
             .otherwise({ redirectTo: '/login' });
     }
+    
+
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
     function run($rootScope, $location, $cookieStore, $http) {

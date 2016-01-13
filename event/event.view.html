@@ -1,107 +1,110 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-
-</head>
-<body>
-  
-
+﻿
+   
     <div id="container">
-        <div class="row">
-            <div class="col-md-12 col-md-offset-1">
-                <div class="row">
+        <form name="eventForm" ng-submit="vm.submit(eventForm)" role="form">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-1">
+                    <div class="row">
 
-                    <button ng-model="vm.event" class="btn btn-primary">Create</button>
-                    <button class="btn btn-secondary-outline">Cancel</button>
+                        <button  type="submit" ng-disabled="eventForm.$invalid || vm.dataLoading" role="form" class="btn btn-primary">Create</button>
+                        <button class="btn btn-secondary-outline">Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="row">
-            <div class="col-md-6">
-                <div class="hr"></div>
-                <div class="col-lg-12">
-                    <div class="col-md-12">
-                        <label for="form">
+            <div id="row">
+                <div class="col-md-6">
+                    <div class="hr"></div>
+                    <div class="col-lg-12">
+                        <div class="col-md-12">
+                            <label for="form">
 
-                        </label>
+                            </label>
+                        </div>
+
+
                     </div>
+                    <div class="hr"></div>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>What</th>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+
+                                                <input list="browsers" name="myBrowser" class="form-control" ng-model="vm.event.eventname" required />
+                                                <datalist id="browsers">
+                                                    <option value="Birthday">
+                                                    <option value="Party">
+                                                    <option value="Homecoming">
+                                                    <option value="Anniversary">
+                                                    <option value="Get together">
+                                                </datalist>
 
 
-                </div>
-                <div class="hr"></div>
 
-                <table>
-                    <tbody>
-                        <tr >
-                            <th></th>
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <input list="browsers" name="myBrowser" class="form-control" />
-                                        <datalist id="browsers">
-                                            <option value="Birthday">
-                                            <option value="Party">
-                                            <option value="Homecoming">
-                                            <option value="Anniversary">
-                                            <option value="Get together">
-                                        </datalist>
-                                    </div>
-                                    <div class="col-sm-8">
+                                                <span class="input-group-addon" id="basic-addon1">@</span>
+                                                <input name="eventname" ng-model="vm.event.eventname" ng-minlength="3" ng-maxlength="100" type="text" class="form-control" placeholder="Event Name" aria-describedby="basic-addon1">
+
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-sm-8">
                                         <input name="title" type="text" class="form-control" placeholder="Event Name" />
+                                    </div>-->
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Host</th>
-                            <td>
-                                <input type="text" name="host" class="form-control" value="{{vm.user.firstName}} {{vm.user.lastName}}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>When</th>
-                            <td>
-                                <div class="row">
-                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Host</th>
+                                <td>
+                                    <input type="text" required name="host" class="form-control" value="{{user.firstName}} {{vuser.lastName}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>When</th>
+                                <td>
+                                    <div class="row">
+
 
                                         <div class='col-sm-5'>
-                                            <input type='text' class="form-control" id='datetimepicker1' autocomplete="on" />
+                                            <input type='text' ng-model="vm.whenStart" class="form-control" id='datetimepicker1' autocomplete="on" />
 
                                         </div>
-                                       <div class="col-sm-2"><span>to</span></div>
+                                        <div class="col-sm-2"><span>to</span></div>
                                         <div class="col-sm-5">
 
-                                            <input type="text" class="form-control" id="datetimepicker2" autocomplete="on" />
+                                            <input type="text" ng-model="vm.whenEnd" class="form-control" id="datetimepicker2" autocomplete="on" />
                                         </div>
-                                  
-                                </div>
-                                <!--TODO:  datetimepicker is not a funtion -->
-                                <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-        $('#datetimepicker2').datetimepicker();
-    });
-                                </script>
 
-                               
-                             
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>All day</th>
-                            <td>
-                                <form>
-                                    <input type="checkbox" />
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                Where
-                            </th>
-                            <td>
-                                <script>
+                                    </div>
+                                    <!--TODO:  datetimepicker is not a funtion -->
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker1').datetimepicker();
+                                            $('#datetimepicker2').datetimepicker();
+                                        });
+                                    </script>
+
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>All day</th>
+                                <td>
+                                    <form>
+                                        <input type="checkbox" />
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Where
+                                </th>
+                                <td>
+                                    <script>
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -33.8688, lng: 151.2195 },
@@ -177,81 +180,92 @@
         setupClickListener('changetype-geocode', ['geocode']);
     }
 
-                                </script>
-                                <form>
-                                    <input class="form-control controls" id="pac-input" type="text"
-                                           placeholder="Enter a location" />
-                                </form>
+                                    </script>
+                                    <form>
+                                        <input class="form-control controls" required ng-model="vm.where" id="pac-input" type="text"
+                                               placeholder="Enter a location" />
+                                    </form>
 
-                            </td>
-                        </tr>
-
-
-
-                        <tr>
-                            <th>
-                                Description
-                            </th>
-                            <td>
-                                <form>
-                                    <textarea class="form-control"></textarea>
-                                </form>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
 
 
 
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                                <td>
+                                    <form>
+                                        <textarea ng-model="vm.description" class="form-control"></textarea>
+                                    </form>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <th class="ep-dp-dt-th">
-                                <label>Visibility </label>
-                            </th>
-                            <td>
-                                <form autocomplete="off" id="">
-                                    <input id="privacyPrivate" class="ep-dp-radio" name="privacy" type="radio" value="1" checked="checked" tabindex="0" ><label class="ep-dp-radio" id=":1q.privacyPrivate-wrapper" for=":1q.privacyPrivate">Private</label>
-                                    <input id="privacyPublic" class="ep-dp-radio" name="privacy" type="radio" value="2"  tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPublic-wrapper" for=":1q.privacyPublic">Public</label>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="hr"></div>
 
-            </div>
-        </div>
-        <div class="row">
 
-            <div class="col-md-6">
-                <div class="col-lg-12">
-                    <div class="col-md-12">
-                        <label for="form">
 
-                        </label>
-                    </div>
-
+                            <tr>
+                                <th class="ep-dp-dt-th">
+                                    <label>Visibility </label>
+                                </th>
+                                <td>
+                                    <form autocomplete="off" id="">
+                                        <input ng-model="vm.visibility"  id="privacyPrivate" class="ep-dp-radio" name="privacy" type="radio" value="1" checked="checked" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPrivate-wrapper" for=":1q.privacyPrivate">Private</label>
+                                        <input  ng-model="vm.visibility" id="privacyPublic" class="ep-dp-radio" name="privacy" type="radio" value="2" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPublic-wrapper" for=":1q.privacyPublic">Public</label>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="hr"></div>
 
                 </div>
-                <table>
-                    <tbody>
-                     
-                        <tr>
-                            <th>Guests</th>
-                            <td>
-                                <div class="col-sm-8">
-                                    <input name="title" type="text" class="form-control" placeholder="Event Name" />
-                                </div>
-                                  
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-        </div>
-    </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="col-lg-12">
+                        <div class="col-md-12">
+                            <label for="form">
+
+                            </label>
+                        </div>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3nl8LHWHrzIK7M4HfYph2baLjPkbJtsM&signed_in=true&libraries=places&callback=initMap"
-            async defer></script>
-</body>
+                    </div>
+                    <table>
+                        <tbody>
 
-</html>
+                            <tr>
+                                <th>Guests</th>
+                                <td>
+                                    <div class="col-sm-8">
+                                        <input name="guests" type="text" class="form-control " placeholder="Event Name" />
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <ul>
+
+                                        <li ng-repeat="user in vm.allUsers">
+                                            {{vm.user.username}} ({{vm.user.firstName}} {{user.lastName}})
+                                            - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
+                                        </li>
+                                    </ul>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+                  </div>
+  
+   
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3nl8LHWHrzIK7M4HfYph2baLjPkbJtsM&signed_in=true&libraries=places&callback=initMap"
+            async defer></script>-->
