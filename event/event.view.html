@@ -59,7 +59,9 @@
                             <tr>
                                 <th>Host</th>
                                 <td>
-                                    <input type="text" required name="host" class="form-control" value="{{user.firstName}} {{vuser.lastName}}">
+                                    <ng-form ng-model="vm.host">
+                                        <input type="text" required name="host" class="form-control" value="{{vm.user.firstName}} {{vm.user.lastName}}">
+                                     </ng-form>
                                 </td>
                             </tr>
                             <tr>

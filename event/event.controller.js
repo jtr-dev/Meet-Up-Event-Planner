@@ -5,14 +5,14 @@
         .module('app')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['$location', 'UserService', '$rootScope', 'FlashService'];
-    function EventController($location, UserService, FlashService, $rootScope, $http, $log, $timeout) {
+    EventController.$inject = ['$location', 'UserService', '$rootScope'];
+    function EventController($location, UserService, $rootScope, $http) {
         var vm = this;
         vm.data = {};
         vm.event = event;
-
-
-
+        vm.user = null;
+        vm.allUsers = [];
+       
         // Form submit handler.
         vm.submit = function (eventForm) {
             // Trigger validation flag.
@@ -34,79 +34,64 @@
                     'visibility': vm.visibility
 
                 },
-
             };
 
-            $http.post('response.json', config, data)
-               .success(function (data, status, headers, config) {
-                   if (data.status == 'OK') {
-                       vm.eventname = null;
-                       vm.host = null;
-                       vm.whenStart = null;
-                       vm.whenEnd = null;
-                       vm.allday = null;
-                       vm.where = null;
-                       vm.description = null;
-                       vm.visibility = null;
-                       vm.messages = "Your event has been made!";
-                       vm.submitted = false;
-                   } else {
-                       vm.messages = 'oops, error processing request.';
-                       vm.error(data);
-                   }
-               })
-                   .error(function (data, status, headers, config) {
+            var $promise = $http.jsonp('response.json', config)
+                .success(function (data, status, headers, config) {
+                    if (data.status == 'OK') {
+                        vm.eventname = null;
+                        vm.host = null;
+                        vm.whenStart = null;
+                        vm.whenEnd = null;
+                        vm.allday = null;
+                        vm.where = null;
+                        vm.description = null;
+                        vm.visibility = null;
+                        vm.messages = "Your event has been made!";
+                        vm.submitted = false;
 
-                       vm.messages = 'network error. Try again';
-                       vm.log.error(data);
-                   })
-           .finally(function () {
-               $timeout(function () {
-                   vm.messages = null;
-               }, 3000);
-           });
+                    } else {
+                        vm.messages = 'oops, error processing request.';
+                        $log.error(data);
+                    }
+                })
+                    .error(function (data, status, headers, config) {
+                        vm.progress = data;
+                        vm.messages = null;
+                    }, 3000);
+        };
 
+        //vm.progress.addPromise($promise);
+   
 
 
+        initController();
 
-
-            vm.user = null;
-            vm.allUsers = [];
-            vm.deleteUser = deleteUser;
-
-            initController();
-
-            function initController() {
-                loadCurrentUser();
-                loadAllUsers();
-            }
-
-            function loadCurrentUser() {
-                UserService.GetByUsername($rootScope.globals.currentUser.username)
-                    .then(function (user) {
-                        vm.user = user;
-                    });
-            }
-
-            function loadAllUsers() {
-                UserService.GetAll()
-                    .then(function (users) {
-                        vm.allUsers = users;
-                    });
-            }
-
-            function deleteUser(id) {
-                UserService.Delete(id)
-                .then(function () {
-                    loadAllUsers();
-                });
-            }
-
-
-
-
-
-
+        function initController() {
+            loadCurrentUser();
+            loadAllUsers();
         }
+
+        function loadCurrentUser() {
+            UserService.GetByUsername($rootScope.globals.currentUser.username)
+                .then(function (user) {
+                    vm.user = user;
+                });
+        }
+
+        function loadAllUsers() {
+            UserService.GetAll()
+                .then(function (users) {
+                    vm.allUsers = users;
+                });
+        }
+
+
     }
+
+
+
+
+
 })();
+
