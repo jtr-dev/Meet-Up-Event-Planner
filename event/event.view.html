@@ -4,11 +4,13 @@
         <form name="eventForm" ng-submit="vm.submit(eventForm)" role="form">
             <div class="row">
                 <div class="col-md-12 col-md-offset-1">
-                    <div class="row">
-
-                        <button  type="submit" ng-disabled="eventForm.$invalid || vm.dataLoading" role="form" class="btn btn-primary">Create</button>
-                        <button class="btn btn-secondary-outline">Cancel</button>
+                    <div class="form-actions">
+                        <pre class="ng-binding">{{vm.event | json}}</pre>
+                        <button type="submit" ng-disabled="eventForm.$invalid || vm.dataLoading" role="form" class="btn btn-primary">Create</button>
+                        <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                        <a href="#/login" class="btn btn-link">Cancel</a>
                     </div>
+                  
                 </div>
             </div>
             <div id="row">
@@ -24,6 +26,7 @@
 
                     </div>
                     <div class="hr"></div>
+
 
                     <table>
                         <tbody>
@@ -60,7 +63,7 @@
                                 <th>Host</th>
                                 <td>
                                     <ng-form ng-model="vm.host">
-                                        <input type="text" required name="host" class="form-control" value="{{vm.user.firstName}} {{vm.user.lastName}}">
+                                        <input type="text" ng-model="vm.event.host" required name="host" class="form-control" value="{{vm.user.firstName}} {{vm.user.lastName}}">
                                      </ng-form>
                                 </td>
                             </tr>
@@ -71,13 +74,13 @@
 
 
                                         <div class='col-sm-5'>
-                                            <input type='text' ng-model="vm.whenStart" class="form-control" id='datetimepicker1' autocomplete="on" />
+                                            <input type='text' ng-model="vm.event.whenStart" class="form-control" id='datetimepicker1' autocomplete="on" />
 
                                         </div>
                                         <div class="col-sm-2"><span>to</span></div>
                                         <div class="col-sm-5">
 
-                                            <input type="text" ng-model="vm.whenEnd" class="form-control" id="datetimepicker2" autocomplete="on" />
+                                            <input type="text" ng-model="vm.event.whenEnd" class="form-control" id="datetimepicker2" autocomplete="on" />
                                         </div>
 
                                     </div>
@@ -184,7 +187,7 @@
 
                                     </script>
                                     <form>
-                                        <input class="form-control controls" required ng-model="vm.where" id="pac-input" type="text"
+                                        <input class="form-control controls" required ng-model="vm.event.where" id="pac-input" type="text"
                                                placeholder="Enter a location" />
                                     </form>
 
@@ -199,7 +202,7 @@
                                 </th>
                                 <td>
                                     <form>
-                                        <textarea ng-model="vm.description" class="form-control"></textarea>
+                                        <textarea ng-model="vm.event.description" class="form-control"></textarea>
                                     </form>
                                 </td>
                             </tr>
@@ -243,7 +246,7 @@
                                 <th>Guests</th>
                                 <td>
                                     <div class="col-sm-8">
-                                        <input name="guests" type="text" class="form-control " placeholder="Event Name" />
+                                        <input name="guests" ng-model="vm.event.guests" type="text" class="form-control " placeholder="Event Name" />
                                     </div>
 
                                 </td>
