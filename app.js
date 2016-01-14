@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', ])
+        .module('app', ['ngRoute', 'ngCookies'])
         .config(config)
         .run(run);
 
@@ -30,6 +30,12 @@
             .when('/event', {
                 controller: 'EventController',
                 templateUrl: 'event/event.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/events', {
+                controller: 'EventController',
+                templateUrl: 'event/events.view.html',
                 controllerAs: 'vm'
             })
 
