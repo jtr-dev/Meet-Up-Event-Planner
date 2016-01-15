@@ -54,7 +54,7 @@
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{ 'has-error': form.where.$dirty && form.where.$error.required }">
                         <label for="where">Where</label>
-                        <input type="text" name="where" id="where" class="form-control" ng-model="vm.events.where" required />
+                        <input type="text" name="where" id="where" class="form-control" ng-model="vm.events.where" required pattern="" />
                         <span ng-show="form.where.$dirty && form.where.$error.required" class="help-block">Where at?</span>
                     </div>
                 </div>
