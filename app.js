@@ -2,10 +2,27 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies'])
+        .module('app', ['ngRoute', 'ngCookies']).directive('ngModelOnblur', function () {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                priority: 1, // needed for angular 1.2.x
+                link: function (scope, elm, attr, ngModelCtrl) {
+                    if (attr.type === 'radio' || attr.type === 'checkbox') return;
+
+                    elm.unbind('input').unbind('keydown').unbind('change');
+                    elm.bind('blur', function () {
+                        scope.$apply(function () {
+                            ngModelCtrl.$setViewValue(elm.val());
+                        });
+                    });
+                }
+            }
+        })
         .config(config)
         .run(run);
-
+        
+        
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider, $rootScope, $http) {
         $routeProvider
@@ -34,14 +51,17 @@
             })
 
             .when('/events', {
-                controller: 'EventController',
-                templateUrl: 'event/events.view.html',
+                controller: 'EventsController',
+                templateUrl: 'events/events.view.html',
                 controllerAs: 'vm'
             })
 
             .otherwise({ redirectTo: '/login' });
     }
     
+
+  
+
 
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
@@ -61,5 +81,30 @@
             }
         });
     }
+
+
+
+
+    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
+    function run($rootScope, $location, $cookieStore, $http) {
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentEvent) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentEvent.authdata; // jshint ignore:line
+        }
+
+     
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 })();

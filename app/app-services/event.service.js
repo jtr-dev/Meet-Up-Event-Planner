@@ -29,8 +29,8 @@
 
         }
 
-        function GetByEventName(eventname) {
-            return $http.get('/api/events/' + eventname).then(handleSuccess, handleError('Error getting event by event name'));
+        function GetByEventName(eventName) {
+            return $http.get('/api/events/' + eventName).then(handleSuccess, handleError('Error getting event by event name'));
         }
 
         //function GetAllGuests(username) {

@@ -1,276 +1,89 @@
-﻿
-   
-    <div id="container">
-        <form name="eventForm" ng-submit="vm.submit(eventForm)" role="form">
-            <div class="row">
-                <div class="col-md-12 col-md-offset-1">
-                    <div class="form-actions">
-                        <pre class="ng-binding">{{vm.event | json}}</pre>
-                        <button type="submit" ng-disabled="eventForm.$invalid || vm.dataLoading" role="form" class="btn btn-primary">Create</button>
-                        <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        <a href="#/login" class="btn btn-link">Cancel</a>
-                    </div>
-                  
+﻿<div class="col-md-8 col-md-offset-3">
+    <h2>Create Event</h2>
+    <pre class="ng-binding">{{vm.events | json}}</pre>
+    <form name="form" ng-submit="vm.event()" role="form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': form.eventName.$dirty && form.eventName.$error.required }">
+                    <label for="eventName">What</label>
+
+                    <input list="browsers" name="myBrowser" class="form-control" ng-model="vm.events.eventName" required />
+                    <datalist id="browsers">
+                        <option value="Birthday">
+                        <option value="Party">
+                        <option value="Homecoming">
+                        <option value="Anniversary">
+                        <option value="Get together">
+                    </datalist>
+                    <span ng-show="form.eventName.$dirty && form.eventName.$error.required" class="help-block">Event Name is required</span>
+
+
+
                 </div>
             </div>
-            <div id="row">
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': form.host.$dirty && form.host.$error.required }">
+                    <label for="host">Host</label>
+                    <input type="text" name="host" id="Text1" ng-model="vm.events.host" class="form-control" required ng-value="string" value="{{vm.user.firstName}} {{vm.user.lastName}}" />
+                    <span ng-show="form.host.$dirty && form.host.$error.required" class="help-block">Host Name is required</span>
+                </div>
+            </div>
+        </div >
+        <div div class="row">
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': form.whenStart.$dirty && form.whenStart.$error.required }">
+                    <label for="whenStart">When</label>
+                    <input type='text' 
+                           ng-model="vm.events.whenStart"
+                           ng-model-onblur ng-change="update()"
+                           class="form-control" id='datetimepicker1' autocomplete="on" />
+
+                    <span ng-show="form.whenStart.$dirty && form.whenStart.$error.required" class="help-block">When is required</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': form.whenEnd.$dirty && form.whenEnd.$error.required }">
+                    <label for="whenEnd">Until</label>
+                    <input type="text" ng-model="vm.events.whenEnd" ng-model-onblur ng-change="update()" class="form-control" id="datetimepicker2" autocomplete="on" />
+
+                    <span ng-show="form.whenEnd.$dirty && form.whenEnd.$error.required" class="help-block">Until what date?</span>
+                </div>
+            </div>
+        </div>
+            <div class="row">
                 <div class="col-md-6">
-                    <div class="hr"></div>
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <label for="form">
-
-                            </label>
-                        </div>
-
-
+                    <div class="form-group" ng-class="{ 'has-error': form.where.$dirty && form.where.$error.required }">
+                        <label for="where">Where</label>
+                        <input type="text" name="where" id="where" class="form-control" ng-model="vm.events.where" required />
+                        <span ng-show="form.where.$dirty && form.where.$error.required" class="help-block">Where at?</span>
                     </div>
-                    <div class="hr"></div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
+                    <label for="description">Description</label>
+                    <textarea type="text" name="description" id="description" class="form-control" maxlength="100" ng-model="vm.events.description" required />
+                    <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block"></span>
+                </div>
+            </div>
+        </div>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Create</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <a href="#/login" class="btn btn-link">Cancel</a>
+            </div>
+</form>
+</div>
 
 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>What</th>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="input-group">
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker();
+    });
+    function getValue() {
+        var theValue = $('#mysearchfield').val()
 
-                                                <input list="browsers" name="myBrowser" class="form-control" ng-model="vm.event.eventname" required />
-                                                <datalist id="browsers">
-                                                    <option value="Birthday">
-                                                    <option value="Party">
-                                                    <option value="Homecoming">
-                                                    <option value="Anniversary">
-                                                    <option value="Get together">
-                                                </datalist>
-
-
-
-                                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                                <input name="eventname" ng-model="vm.event.eventname" ng-minlength="3" ng-maxlength="100" type="text" class="form-control" placeholder="Event Name" aria-describedby="basic-addon1">
-
-                                            </div>
-                                        </div>
-                                        <!--<div class="col-sm-8">
-                                        <input name="title" type="text" class="form-control" placeholder="Event Name" />
-                                    </div>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Host</th>
-                                <td>
-                                    <ng-form ng-model="vm.host">
-                                        <input type="text" ng-model="vm.event.host" required name="host" class="form-control" value="{{vm.user.firstName}} {{vm.user.lastName}}">
-                                     </ng-form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>When</th>
-                                <td>
-                                    <div class="row">
-
-
-                                        <div class='col-sm-5'>
-                                            <input type='text' ng-model="vm.event.whenStart" class="form-control" id='datetimepicker1' autocomplete="on" />
-
-                                        </div>
-                                        <div class="col-sm-2"><span>to</span></div>
-                                        <div class="col-sm-5">
-
-                                            <input type="text" ng-model="vm.event.whenEnd" class="form-control" id="datetimepicker2" autocomplete="on" />
-                                        </div>
-
-                                    </div>
-                                    <!--TODO:  datetimepicker is not a funtion -->
-                                    <script type="text/javascript">
-                                        $(function () {
-                                            $('#datetimepicker1').datetimepicker();
-                                            $('#datetimepicker2').datetimepicker();
-                                        });
-                                    </script>
-
-
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>All day</th>
-                                <td>
-                                    <form>
-                                        <input type="checkbox" />
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Where
-                                </th>
-                                <td>
-                                    <script>
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: -33.8688, lng: 151.2195 },
-            zoom: 13
-        });
-        var input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
-
-        var types = document.getElementById('type-selector');
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.bindTo('bounds', map);
-
-        var infowindow = new google.maps.InfoWindow();
-        var marker = new google.maps.Marker({
-            map: map,
-            anchorPoint: new google.maps.Point(0, -29)
-        });
-
-        autocomplete.addListener('place_changed', function () {
-            infowindow.close();
-            marker.setVisible(false);
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
-                return;
-            }
-
-            // If the place has a geometry, then present it on a map.
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-            } else {
-                map.setCenter(place.geometry.location);
-                map.setZoom(17);  // Why 17? Because it looks good.
-            }
-            marker.setIcon(/** @type {google.maps.Icon} */({
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(35, 35)
-            }));
-            marker.setPosition(place.geometry.location);
-            marker.setVisible(true);
-
-            var address = '';
-            if (place.address_components) {
-                address = [
-                  (place.address_components[0] && place.address_components[0].short_name || ''),
-                  (place.address_components[1] && place.address_components[1].short_name || ''),
-                  (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
-            }
-
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-            infowindow.open(map, marker);
-        });
-
-        // Sets a listener on a radio button to change the filter type on Places
-        // Autocomplete.
-        function setupClickListener(id, types) {
-            var radioButton = document.getElementById(id);
-            radioButton.addEventListener('click', function () {
-                autocomplete.setTypes(types);
-            });
-        }
-
-        setupClickListener('changetype-all', []);
-        setupClickListener('changetype-address', ['address']);
-        setupClickListener('changetype-establishment', ['establishment']);
-        setupClickListener('changetype-geocode', ['geocode']);
     }
-
-                                    </script>
-                                    <form>
-                                        <input class="form-control controls" required ng-model="vm.event.where" id="pac-input" type="text"
-                                               placeholder="Enter a location" />
-                                    </form>
-
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <th>
-                                    Description
-                                </th>
-                                <td>
-                                    <form>
-                                        <textarea ng-model="vm.event.description" class="form-control"></textarea>
-                                    </form>
-                                </td>
-                            </tr>
-
-
-
-
-                            <tr>
-                                <th class="ep-dp-dt-th">
-                                    <label>Visibility </label>
-                                </th>
-                                <td>
-                                    <form autocomplete="off" id="">
-                                        <input ng-model="vm.visibility"  id="privacyPrivate" class="ep-dp-radio" name="privacy" type="radio" value="1" checked="checked" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPrivate-wrapper" for=":1q.privacyPrivate">Private</label>
-                                        <input  ng-model="vm.visibility" id="privacyPublic" class="ep-dp-radio" name="privacy" type="radio" value="2" tabindex="0"><label class="ep-dp-radio" id=":1q.privacyPublic-wrapper" for=":1q.privacyPublic">Public</label>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="hr"></div>
-
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="col-lg-12">
-                        <div class="col-md-12">
-                            <label for="form">
-
-                            </label>
-                        </div>
-
-
-                    </div>
-                    <table>
-                        <tbody>
-
-                            <tr>
-                                <th>Guests</th>
-                                <td>
-                                    <div class="col-sm-8">
-                                        <input name="guests" ng-model="vm.event.guests" type="text" class="form-control " placeholder="Event Name" />
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <ul>
-
-                                        <li ng-repeat="user in vm.allUsers">
-                                            {{vm.user.username}} ({{vm.user.firstName}} {{user.lastName}})
-                                            - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
-                                        </li>
-                                    </ul>
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
-                  </div>
-  
-   
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3nl8LHWHrzIK7M4HfYph2baLjPkbJtsM&signed_in=true&libraries=places&callback=initMap"
-            async defer></script>-->
+</script>
