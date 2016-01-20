@@ -22,7 +22,7 @@
     RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService', '$scope'];
     function RegisterController(UserService, $location, $rootScope, FlashService, $scope) {
         var vm = this;
-        $scope.myRegex = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
+        $scope.myRegex = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/;
         //vm.myRegex = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
         
         vm.password = '';

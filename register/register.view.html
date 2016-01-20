@@ -1,6 +1,6 @@
 ﻿<div class="col-md-8 col-md-offset-3">
     <h2>Register</h2>
-    <pre class="ng-binding">{{vm.user | json}}</pre>
+   
     <form name="form" ng-submit="vm.register()" role="form" id="form">
         <div class="row">
             <div class="col-md-6">
@@ -33,7 +33,7 @@
                 <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control" ng-change="analyze(password)" ng-model="vm.user.password" required ng-pattern="myRegex" />
-                    <span ng-show="form.password.$dirty && form.Password.$error.pattern" class="help-block">Password is required</span>
+                    <span ng-show="form.password.$dirty && form.password.$error.pattern" class="help-block">At least 8 characters, 1 Uppercase, lowercase and number.</span>
                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
                 </div>
             </div>
