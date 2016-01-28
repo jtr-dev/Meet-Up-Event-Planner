@@ -9,10 +9,21 @@
     function EventController($location, UserService, EventService, $rootScope, $http, FlashService) {
         var vm = this;
 
+        vm.guests = [];
+
+
+        vm.addGuest = function () {
+            vm.guests.push(vm.newGuest);
+        }
+
+        vm.removeGuest = function (guest) {
+            var index = vm.guests.indexOf(guest);
+            vm.guests.splice(index, 1);
+        }
+
         vm.event = event;
-        //vm.events.host = vm.user.firstName + vm.user.lastName;
-
-
+      
+      
         function event() {
             vm.dataLoading = true;
             EventService.Create(vm.events)
@@ -26,6 +37,10 @@
                     }
                 });
         }
+
+
+
+      
 
 
         initController();
@@ -50,7 +65,8 @@
         }
 
        
-    
+      
+
 
 
 

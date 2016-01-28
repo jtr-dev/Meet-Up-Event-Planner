@@ -8,16 +8,18 @@
                 <th>Where</th>
                 <th>When</th>
                 <th>Until</th>
-                <th >Description</th>
+                <th>Description</th>
+                <th>Invited</th>
                 
             </tr>
             <tr>
-                <td>{{events.eventName}}</td>
+                <td>{{events.eventType}}{{events.eventName}}</td>
                 <td>{{events.host}}</td>
                 <td>{{events.where}}</td>
                 <td>{{events.whenStart}}</td>
                 <td>{{events.whenEnd}}</td>
                 <td>{{events.description}}</td>
+                <td>{{guests.guest}} {{guest.guests}}</td>
             </tr>
           
         </table>
