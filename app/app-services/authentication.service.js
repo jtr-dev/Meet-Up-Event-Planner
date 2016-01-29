@@ -1,4 +1,8 @@
-﻿(function () {
+﻿/* Copyright (c) 2014 Jason Watmore  
+    https://github.com/cornflourblue/angular-registration-login-example
+*/
+
+(function () {
     'use strict';
 
     angular
