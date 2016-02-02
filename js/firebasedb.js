@@ -1,1 +1,0 @@
-﻿var myDataRef = new Firebase('https://www.burning-fire-6993.firebaseapp.com');
