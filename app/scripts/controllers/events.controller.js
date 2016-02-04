@@ -9,6 +9,9 @@
     function EventsController(EventService, $rootScope) {
         var vm = this;
 
+      
+
+
         vm.event = null;
         vm.allEvents = [];
         vm.deleteEvent = deleteEvent;
@@ -20,12 +23,7 @@
             loadAllEvents();
         }
 
-        //function loadCurrentEvent() {
-        //    EventService.GetByEventName($rootScope.globals.currentEvent.eventName)
-        //        .then(function (event) {
-        //            vm.event = event;
-        //        });
-        //}
+
 
         function loadAllEvents() {
             EventService.GetAll()

@@ -1,25 +1,27 @@
 ﻿
 <h3>All events:</h3>
 
-        <table ng-repeat="events in vm.allEvents" class="">
+        <table ng-repeat="events in vm.allEvents track by $index" class="">
             <tr>
-                <th>What</th>
+                <th>Event</th>
+                <th>Title</th>
                 <th>Host</th>
-                <th>Where</th>
-                <th>When</th>
-                <th>Until</th>
+                <th>Location</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>Description</th>
-                <th>Invited</th>
+
 
             </tr>
             <tr>
-                <td>{{events.eventType}}{{events.eventName}}</td>
+                <td>{{events.eventType}} </td>
+                <td>{{events.eventName}}</td>
                 <td>{{events.host}}</td>
                 <td>{{events.where}}</td>
                 <td>{{events.whenStart}}</td>
                 <td>{{events.whenEnd}}</td>
                 <td>{{events.description}}</td>
-                <td>{{guests.guest}} {{guest.guests}}</td>
+              
             </tr>
 
         </table>
