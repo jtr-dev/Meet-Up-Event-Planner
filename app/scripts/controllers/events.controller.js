@@ -8,10 +8,6 @@
     EventsController.$inject = ['EventService', '$rootScope'];
     function EventsController(EventService, $rootScope) {
         var vm = this;
-
-      
-
-
         vm.event = null;
         vm.allEvents = [];
         vm.deleteEvent = deleteEvent;
