@@ -1,16 +1,11 @@
 # Meet-Up-Event-Planner
 
 
-TODO:	
+Install following tools to get started
 
-			
-			
- Location Services to autofill 'Where' input
-
-	Google API  ( chrome isn't asking for permission to access location )
-		
-		Need it to catch on localhost or save for testing on global url
-	
-
-	
-				
+* [NodeJS](https://nodejs.org) - `Double click and install`.
+* `npm install --global bower grunt-cli`
+* `cd c:\user\github\repos\etc` Change directories to folder location
+* `npm install`   and install
+* `grunt build`   optionally build & concatenate 
+* `grunt serve`   Launch the local host

@@ -13,7 +13,7 @@
                         <div class="form-group" ng-class="{ 'has-error': form.eventType.$dirty && form.eventType.$error.required }">
                             <label for="eventType">Event Type</label>
 
-                            <input list="eventType" name="myBrowser" class="form-control" ng-model="vm.events.eventType" required />
+                            <input list="eventType" name="myBrowser" class="form-control" ng-model="vm.events.eventType" autofocus required />
                             <datalist id="eventType">
                                 <option value="Birthday">
                                 <option value="Party">
@@ -68,9 +68,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group" ng-class="{ 'has-error': form.where.$dirty && form.where.$error.required }">
-                            <label for="where">Event Location</label>
-                            <input type="text" name="where" id="where" class="form-control" ng-model="vm.events.where" required placeholder="123 Parkway Ave." />
+                        <div id="locationField" class="form-group" ng-class="{ 'has-error': form.where.$dirty && form.where.$error.required }">
+                            <label for="locationField">Event Location</label>
+                            <input type="text" name="locationField" id="autocomplete" class="form-control" ng-model="vm.events.where" required placeholder="123 Parkway Ave." onFocus="geolocate()" />
                             <span ng-show="form.where.$dirty && form.where.$error.required" class="help-block">Where at?</span>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                 </div>
 
             </div>
-
+        </form>
         <form name="form" ng-submit="vm.guest()" role="form">
 
             <div class="col-md-6">
@@ -102,7 +102,7 @@
                         <div class="container ">
                             <div class="form-group" ng-class="{ 'has-error': form.guests.$dirty && form.guests.$error.required }">
                                 <label for="guests">Guest List</label>
-                                <input type="text" name="guests" id="guests" class="form-control" ng-model="vm.events.newGuest" required />
+                                <input type="text" name="guests" id="guests" class="form-control" ng-model="vm.newGuest" required />
                                 <span ng-show="form.guests.$dirty && form.guests.$error.required" class="help-block">Invite someone.</span>
                             </div>
                         </div>
@@ -110,14 +110,14 @@
 
                     </div>
                     <div class="form-actions">
-                        <button type="submit" ng-disabled="guestform.$invalid || vm.dataLoading || guest >= 1 " ng-click="vm.addGuest()" class="btn btn-primary">Add Guest</button>
+                        <button type="submit" ng-disabled="guestform.$invalid || vm.dataLoading" ng-click="vm.addGuest()" class="btn btn-primary">Add Guest</button>
 
                     </div>
                 </div>
 
                     <div class="col-md-12">
-                        <div ng-repeat="vm.events.guest in vm.events.guests track by $index" class="col-sm-4 ">
-                            {{vm.events.guest}}
+                        <div ng-repeat="guest in vm.guests track by $index" class="col-sm-4 ">
+                            {{guest}}
                             - <a class="btn" ng-click="vm.removeGuest(guest)">Delete</a>
                         </div>
 
@@ -125,7 +125,7 @@
 
             </div>
         </form>
-      </form>
+
     </div>
 </div>
 <script type="text/javascript">
@@ -138,3 +138,80 @@
 
     }
 </script>
+
+
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+
+
+
+
+
+<script>
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+var placeSearch, autocomplete;
+
+
+function initAutocomplete() {
+// Create the autocomplete object, restricting the search to geographical
+// location types.
+autocomplete = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+    {types: ['geocode']});
+
+// When the user selects an address from the dropdown, populate the address
+// fields in the form.
+autocomplete.addListener('place_changed', fillInAddress);
+}
+
+// [START region_fillform]
+function fillInAddress() {
+// Get the place details from the autocomplete object.
+var place = autocomplete.getPlace();
+
+for (var component in componentForm) {
+  document.getElementById(component).value = '';
+  document.getElementById(component).disabled = false;
+}
+
+// Get each component of the address from the place details
+// and fill the corresponding field on the form.
+for (var i = 0; i < place.address_components.length; i++) {
+  var addressType = place.address_components[i].types[0];
+  if (componentForm[addressType]) {
+    var val = place.address_components[i][componentForm[addressType]];
+    document.getElementById(addressType).value = val;
+  }
+}
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var geolocation = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    var circle = new google.maps.Circle({
+      center: geolocation,
+      radius: position.coords.accuracy
+    });
+    autocomplete.setBounds(circle.getBounds());
+  });
+}
+}
+// [END region_geolocation]
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1Th3308MqD3RuE0CJkypkyvFhVUqJPZg&signed_in=true&libraries=places&callback=initAutocomplete"
+      async defer></script>
