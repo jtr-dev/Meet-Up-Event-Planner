@@ -6,18 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AngularJS Meetup Event Planner</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-
+    <!-- build:css(.tmp) styles/main.css -->
     <link href="styles/datepicker.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
+
+    <!-- endbuild -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
     <!--Libraries-->
-
-    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js"></script>
-    <script src="scripts/bootstrap-datepicker.js"></script>
 
 
 </head>
@@ -80,14 +76,21 @@
             </div>
         </div>
     </div>
+    <!-- build:js(.) scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-route/angular-route.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
 
-
-    <script src="https://code.angularjs.org/1.2.20/angular.js"></script>
-    <script src="https://code.angularjs.org/1.2.20/angular-route.js"></script>
-    <script src="https://code.angularjs.org/1.2.13/angular-cookies.js"></script>
-
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!--Routing -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/bootstrap-datepicker.js"></script>
     <!--Services-->
     <script src="scripts/services/authentication.service.js"></script>
     <script src="scripts/services/flash.service.js"></script>
@@ -104,7 +107,7 @@
     <script src="scripts/controllers/register.controller.js"></script>
     <script src="scripts/controllers/event.controller.js"></script>
     <script src="scripts/controllers/events.controller.js"></script>
-
+  <!-- endbuild -->
 
 
 </body>

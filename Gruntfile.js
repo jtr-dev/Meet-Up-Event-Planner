@@ -287,13 +287,19 @@ module.exports = function (grunt) {
     //   dist: {
     //     files: {
     //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
+    //         '<%= yeoman.dist %>/scripts/script_1.js', '<%= yeoman.dist %>/scripts/script_2.js', '<%= yeoman.dist %>/scripts/script_3.js'
     //       ]
     //     }
     //   }
     // },
     // concat: {
-    //   dist: {}
+    //   dist: {
+    //     files: {
+    //       '<%= yeoman.dist %>/scripts/scripts.js': [
+    //         '.tmp/scripts/{,*/}*.js'
+    //       ]
+    //     }
+    //   }
     // },
 
     imagemin: {
@@ -338,7 +344,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'meetUpEventPlannerApp',
+          module: 'app',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
@@ -379,6 +385,7 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '*.html',
+            'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
@@ -454,6 +461,14 @@ module.exports = function (grunt) {
     'postcss',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('produce', [
+    'useminPrepare',
+     'concat',
+     'uglify',
+     'cssmin',
+     'usemin'
   ]);
 
   grunt.registerTask('build', [
