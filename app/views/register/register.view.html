@@ -5,14 +5,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-          <label for="username">First name</label>
+          <label for="firstName">First name</label>
           <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" autofocus required placeholder="John" />
           <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-          <label for="username">Last name</label>
+          <label for="lastName">Last name</label>
           <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required placeholder="Doe" />
           <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
         </div>
