@@ -5,8 +5,8 @@
         .module('app')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['$location', 'UserService', 'EventService', '$rootScope', '$http', 'FlashService'];
-    function EventController($location, UserService, EventService, $rootScope, $http, FlashService) {
+    EventController.$inject = ['$scope','$location', 'UserService', 'EventService', '$rootScope', '$http', 'FlashService'];
+    function EventController($scope, $location, UserService, EventService, $rootScope, $http, FlashService) {
         var vm = this;
 
         vm.guests = [];
@@ -35,11 +35,6 @@
                 });
         }
 
-
-
-
-
-
         initController();
 
         function initController() {
@@ -60,14 +55,6 @@
                     vm.allUsers = users;
                 });
         }
-
-
-
-
-
-
-
-
 
     }
 
